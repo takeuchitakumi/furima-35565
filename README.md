@@ -2,20 +2,21 @@
 
 ## users テーブル
 
-| Column        | Type   | Options     |
-| ------------- | ------ | ----------- |
-| nickname      | string | null: false |
-| email         | string | null: false |
-| password      | string | null: false |
-| name_kanji    | string | null: false |
-| name_katakana | string | null: false |
-| birthday      | string | null: false |
+| Column              | Type   | Options                   |
+| ------------------- | ------ | ------------------------- |
+| nickname            | string | null: false               |
+| email               | string | null: false, unique: true |
+| encrypted_password  | string | null: false               |
+| last_name_kanji     | string | null: false               |
+| first_name_kanji    | string | null: false               |
+| last_name_katakana  | string | null: false               |
+| first_name_katakana | string | null: false               |
+| birthday            | date   | null: false               |
 
 ### Association
 
 - has_many :items
 - has_many :purchaces
-- has_many :credits
 
 
 ## items テーブル
@@ -24,51 +25,45 @@
 | ------------- | ---------- | ------------------------------ |
 | image         | ActiveStorageで実装                     
 | title         | text       | null: false                    |
-| category      | string     | null: false                    |
-| status        | string     | null: false                    |
-| shipping_fee  | string     | null: false                    |
-| area          | string     | null: false                    |
-| shipping_date | string     | null: false                    |
+| category_id   | integer    | null: false                    |
+| status_id     | integer    | null: false                    |
+| fee_id        | integer    | null: false                    |
+| area_id       | integer    | null: false                    |
+| date_id       | integer    | null: false                    |
 | price         | integer    | null: false                    |
-| user_id       | references | null: false, foreign_key: true |
+| user          | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - has_one :purchase
-- has_one :credit
 
 
 ## purchaces テーブル
 
 | Column       | Type       | Options                       |
 | ------------ | ---------- | ----------------------------- |
-| postal       | text       | null: false                   |
+| postal       | integer    | null: false                   |
 | prefecture   | text       | null: false                   |
 | municipality | text       | null: false                   |
 | address      | text       | null: false                   |
-| building     | text       | null: false                   |
+| building     | text       |                               |
 | phone        | integer    | null: false                   |
-| user_id      | references | null: false, foreign_key: true|
-| item_id      | references | null: false, foreign_key: true|
+| user         | references | null: false, foreign_key: true|
+| item         | references | null: false, foreign_key: true|
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
-- has_one :credit
 
 
-## credits テーブル
+## histories テーブル
 
-| Column        | Type   | Options     |
-| ------------- | ------ | ----------- |
-| card          | integer | null: false |
-| expiration    | integer | null: false |
-| security      | integer | null: false |
-| user_id       | references | null: false, foreign_key: true |
-| item_id       | references | null: false, foreign_key: true |
-| purchace_id   | references | null: false, foreign_key: true |
+| Column   | Type       | Options                        |
+| -------- | ---------- | ------------------------------ |
+| user     | references | null: false, foreign_key: true |
+| item     | references | null: false, foreign_key: true |
 
 ### Association
 
