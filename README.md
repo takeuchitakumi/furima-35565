@@ -16,14 +16,13 @@
 ### Association
 
 - has_many :items
-- has_many :addresses
+- has_many :histories
 
 
 ## items テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| image         | ActiveStorageで実装                     
 | title         | string     | null: false                    |
 | description   | text       | null: false                    |
 | category_id   | integer    | null: false                    |
@@ -37,26 +36,23 @@
 ### Association
 
 - belongs_to :user
-- has_one :address
+- has_one :history
 
 
 ## addresses テーブル
 
 | Column       | Type       | Options                       |
 | ------------ | ---------- | ----------------------------- |
-| postal       | integer    | null: false                   |
+| postal       | string     | null: false                   |
 | area_id      | integer    | null: false                   |
 | municipality | string     | null: false                   |
 | address      | string     | null: false                   |
 | building     | string     |                               |
-| phone        | integer    | null: false                   |
-| user         | references | null: false, foreign_key: true|
-| item         | references | null: false, foreign_key: true|
+| phone        | string     | null: false                   |
+| history      | references | null: false, foreign_key: true|
 
 ### Association
 
-- belongs_to :user
-- belongs_to :item
 - belongs_to :history
 
 
