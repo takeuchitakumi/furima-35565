@@ -16,7 +16,7 @@
 ### Association
 
 - has_many :items
-- has_many :purchaces
+- has_many :addresses
 
 
 ## items テーブル
@@ -24,7 +24,8 @@
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
 | image         | ActiveStorageで実装                     
-| title         | text       | null: false                    |
+| title         | string     | null: false                    |
+| description   | text       | null: false                    |
 | category_id   | integer    | null: false                    |
 | status_id     | integer    | null: false                    |
 | fee_id        | integer    | null: false                    |
@@ -36,18 +37,18 @@
 ### Association
 
 - belongs_to :user
-- has_one :purchase
+- has_one :address
 
 
-## purchaces テーブル
+## addresses テーブル
 
 | Column       | Type       | Options                       |
 | ------------ | ---------- | ----------------------------- |
 | postal       | integer    | null: false                   |
-| prefecture   | text       | null: false                   |
-| municipality | text       | null: false                   |
-| address      | text       | null: false                   |
-| building     | text       |                               |
+| area_id      | integer    | null: false                   |
+| municipality | string     | null: false                   |
+| address      | string     | null: false                   |
+| building     | string     |                               |
 | phone        | integer    | null: false                   |
 | user         | references | null: false, foreign_key: true|
 | item         | references | null: false, foreign_key: true|
@@ -56,6 +57,7 @@
 
 - belongs_to :user
 - belongs_to :item
+- belongs_to :history
 
 
 ## histories テーブル
@@ -69,4 +71,4 @@
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :purchace
+- has_one :address
