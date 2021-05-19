@@ -1,12 +1,16 @@
 class User < ApplicationRecord
   with_options presence: true do
-    validates :nickname            
-    validates :last_name_kanji,     format: { with: /\A[ぁ-んァ-ン一-龥]+\z/ }
-    validates :first_name_kanji,    format: { with: /\A[ぁ-んァ-ン一-龥]+\z/ }
-    validates :last_name_katakana,  format: { with: /\A([ァ-ン]|ー)+\z/ }
-    validates :first_name_katakana, format: { with: /\A([ァ-ン]|ー)+\z/ }
+    validates :nickname 
+      with_options format: { with: /\A[ぁ-んァ-ン一-龥]+\z/ } do
+        validates :last_name_kanji   
+        validates :first_name_kanji   
+      end
+      with_options format: { with: /\A([ァ-ン]|ー)+\z/ } do
+        validates :last_name_katakana  
+        validates :first_name_katakana
+      end
     validates :birthday
-    validates :password,            format: { with: /\A[a-z0-9]+\z/i }
+    validates :password, format: { with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]/ }
   end
     # Include default devise modules. Others available are:
     # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
