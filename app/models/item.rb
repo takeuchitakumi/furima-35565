@@ -6,6 +6,7 @@ class Item < ApplicationRecord
   belongs_to :fee
   belongs_to :area
   belongs_to :day
+  has_one_attached :image
   # has_one :history
 
   with_options presence: true do
