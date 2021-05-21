@@ -23,7 +23,7 @@ class Item < ApplicationRecord
       validates :status_id
       validates :fee_id
       validates :area_id
-      validates :date_id
+      validates :day_id
     end
   end
 end

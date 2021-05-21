@@ -7,7 +7,7 @@ RSpec.describe Item, type: :model do
 
   describe '商品出品機能' do
     context '商品が出品できるとき' do
-      it 'imageとtitle、description、price、category_id、status_id、fee_id、area_id、date_idが存在すれば登録できる' do
+      it 'imageとtitle、description、price、category_id、status_id、fee_id、area_id、day_idが存在すれば登録できる' do
         expect(@item).to be_valid
       end
       it 'priceが300以上9999999以下であれば登録できる' do
@@ -54,10 +54,10 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Area must be other than 1')
       end
-      it 'date_idが1では登録できない' do
-        @item.date_id = 1
+      it 'day_idが1では登録できない' do
+        @item.day_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Date must be other than 1')
+        expect(@item.errors.full_messages).to include('Day must be other than 1')
       end
       it 'imageが空では登録できない' do
         @item.image = nil
