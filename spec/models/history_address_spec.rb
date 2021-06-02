@@ -74,7 +74,6 @@ RSpec.describe HistoryAddress, type: :model do
     it 'phoneが12桁以上では保存ができないこと' do
       @history_address.phone = '111111111111'
       @history_address.valid?
-      binding.pry
       expect(@history_address.errors.full_messages).to include('Phone is invalid')
     end
   end
