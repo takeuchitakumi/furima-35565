@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :item_id, only: [:show, :edit, :update, :destroy]
   before_action :ensure_current_user, only: [:edit, :update, :destroy]
-  
+
   def index
     @items = Item.order('created_at DESC')
   end
@@ -24,19 +24,18 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    redirect_to root_path if @item.history.present?
   end
 
   def update
     if @item.update(item_params)
-      redirect_to item_path(@item.id),method: :get
+      redirect_to item_path(@item.id), method: :get
     else render :edit
     end
   end
 
   def destroy
-    if @item.destroy
-      redirect_to root_path
-    end
+    redirect_to root_path if @item.destroy
   end
 
   private
@@ -47,9 +46,7 @@ class ItemsController < ApplicationController
   end
 
   def ensure_current_user
-    unless user_signed_in? && current_user.id == @item.user_id
-      redirect_to action: :index
-    end
+    redirect_to action: :index unless user_signed_in? && current_user.id == @item.user_id
   end
 
   def item_id
