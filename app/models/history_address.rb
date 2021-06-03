@@ -1,6 +1,6 @@
 class HistoryAddress
   include ActiveModel::Model
-  attr_accessor :postal, :prefecture_id, :city, :house_number, :building_name, :phone, :user_id, :item_id, :history_id, :token
+  attr_accessor :postal, :prefecture_id, :city, :house_number, :building_name, :phone, :user_id, :item_id, :token
 
   with_options presence: true do
     validates :user_id
@@ -9,7 +9,7 @@ class HistoryAddress
     validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
     validates :city
     validates :house_number
-    validates :phone, format: { with: /\A[0-9]{,11}\z/ }
+    validates :phone, format: { with: /\A\d{10,11}\z/ }
     validates :token
   end
 

@@ -17,10 +17,9 @@ RSpec.describe HistoryAddress, type: :model do
       expect(@history_address).to be_valid
     end
     it 'postalは半角数字３つ-半角数字４つで保存できる' do
-      @history_address.building_name = 123 - 4567
       expect(@history_address).to be_valid
     end
-    it 'phoneは11桁以内なら保存できる' do
+    it 'phoneは11桁以内の数値なら保存できる' do
       expect(@history_address).to be_valid
     end
   end
@@ -71,7 +70,7 @@ RSpec.describe HistoryAddress, type: :model do
       @history_address.valid?
       expect(@history_address.errors.full_messages).to include("Item can't be blank")
     end
-    it 'phoneが12桁以上では保存ができないこと' do
+    it 'phoneが11桁以内の数値でなければ保存ができないこと' do
       @history_address.phone = '111111111111'
       @history_address.valid?
       expect(@history_address.errors.full_messages).to include('Phone is invalid')
