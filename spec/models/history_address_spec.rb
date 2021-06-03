@@ -75,5 +75,15 @@ RSpec.describe HistoryAddress, type: :model do
       @history_address.valid?
       expect(@history_address.errors.full_messages).to include('Phone is invalid')
     end
+    it 'phoneが全角数字だと保存ができないこと' do
+      @history_address.phone = '１２３４５６７８９１'
+      @history_address.valid?
+      expect(@history_address.errors.full_messages).to include('Phone is invalid')
+    end
+    it 'phoneが半角数字のみでなければ保存ができないこと' do
+      @history_address.phone = 'あいう'
+      @history_address.valid?
+      expect(@history_address.errors.full_messages).to include('Phone is invalid')
+    end
   end
 end
